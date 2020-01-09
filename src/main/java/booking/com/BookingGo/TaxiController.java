@@ -7,14 +7,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import booking.com.BookingGo.Car.carType;
+import booking.com.BookingGo.Taxi.carType;
 
-public class TaxiSuppliers {
+public class TaxiController {
 	
 	public JsonObject callTaxiAPI(String pickup, String dropoff, int passengers, String supplier) {
 		
@@ -64,9 +65,9 @@ public class TaxiSuppliers {
 		return jsonResponse;
 	}
 	
-	public ArrayList<Car> parseJsonObject(JsonObject jsonResponse,int passengers, String supplier) {
+	public ArrayList<Taxi> parseJsonObject(JsonObject jsonResponse,int passengers, String supplier) {
 		
-		ArrayList<Car> cars = new ArrayList<Car>();
+		ArrayList<Taxi> cars = new ArrayList<Taxi>();
 		
 		JsonElement options = jsonResponse.get("options");
 		int length = options.getAsJsonArray().size();
@@ -74,7 +75,7 @@ public class TaxiSuppliers {
 		for(int i=0;i<length;i++) {
 			JsonElement type = options.getAsJsonArray().get(i).getAsJsonObject().get("car_type");
 			JsonElement price = options.getAsJsonArray().get(i).getAsJsonObject().get("price");
-			Car car = new Car(carType.valueOf(type.getAsString()), price.getAsInt(),supplier);
+			Taxi car = new Taxi(carType.valueOf(type.getAsString()), price.getAsInt(),supplier);
 			if (car.getSeats()>=passengers) {
 				cars.add(car);	
 			}		
@@ -83,13 +84,26 @@ public class TaxiSuppliers {
 		
 	}
 	
-	public ArrayList<Car> getTaxiOptions(String pickup,String dropoff,int passengers,String supplier){
+	public ArrayList<Taxi> getTaxiOptions(String pickup,String dropoff,int passengers,String supplier){
 		JsonObject jsonObject = callTaxiAPI(pickup, dropoff, passengers, supplier);
 		if(jsonObject == null) {
 			return null;
 		}
 		
 		return parseJsonObject(jsonObject, passengers, supplier);
+	}
+	
+	public String getString(ArrayList<Taxi> taxiList, String supplier) {
+		String returnString = "";
+		if (taxiList.isEmpty() || taxiList == null) {
+    		returnString = "No cars available at this time from " + supplier + " - Please try again later";
+    	} else {
+    		Collections.sort(taxiList,Collections.reverseOrder());
+        	for(int i = 0; i<taxiList.size();i++) {
+        		returnString = returnString + "\n" + taxiList.get(i).getCarType().toString()+ " - " + taxiList.get(i).getSupplier() + " - " + taxiList.get(i).getPrice();
+        	}
+    	}
+		return returnString;
 		
 	}
 	

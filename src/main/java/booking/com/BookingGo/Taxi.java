@@ -1,6 +1,6 @@
 package booking.com.BookingGo;
 
-public class Car implements Comparable<Car>{
+public class Taxi implements Comparable<Taxi>{
 	
 	int price;
 	int seats;
@@ -11,7 +11,7 @@ public class Car implements Comparable<Car>{
 		STANDARD,EXECUTIVE,LUXURY,PEOPLE_CARRIER,LUXURY_PEOPLE_CARRIER,MINIBUS;
 	}
 	
-	public Car(carType type, int price, String supplier_id) {
+	public Taxi(carType type, int price, String supplier_id) {
 		this.carType = type;
 		this.price = price;
 		this.supplier_id = supplier_id;
@@ -57,7 +57,7 @@ public class Car implements Comparable<Car>{
 		this.price = price;
 	}
 	
-	public int compareTo(Car car) {
+	public int compareTo(Taxi car) {
 		return Integer.compare(this.getPrice(), car.getPrice());
 	}
 	
