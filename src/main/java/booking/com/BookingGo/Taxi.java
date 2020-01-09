@@ -17,6 +17,7 @@ public class Taxi implements Comparable<Taxi>{
 		this.supplier_id = supplier_id;
 	}
 	
+	
 	public int getSeats() {
 		switch(this.carType) {
 		case STANDARD:

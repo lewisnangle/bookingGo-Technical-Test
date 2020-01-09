@@ -75,9 +75,9 @@ public class TaxiController {
 		for(int i=0;i<length;i++) {
 			JsonElement type = options.getAsJsonArray().get(i).getAsJsonObject().get("car_type");
 			JsonElement price = options.getAsJsonArray().get(i).getAsJsonObject().get("price");
-			Taxi car = new Taxi(carType.valueOf(type.getAsString()), price.getAsInt(),supplier);
-			if (car.getSeats()>=passengers) {
-				cars.add(car);	
+			Taxi taxi = new Taxi(carType.valueOf(type.getAsString()), price.getAsInt(),supplier);
+			if (taxi.getSeats()>=passengers) {
+				cars.add(taxi);	
 			}		
 		}
 		return cars;

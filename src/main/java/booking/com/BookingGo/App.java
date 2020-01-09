@@ -2,9 +2,13 @@ package booking.com.BookingGo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.google.gson.JsonObject;
+
+import booking.com.BookingGo.Taxi.carType;
 
 
 public class App {
@@ -58,4 +62,82 @@ public class App {
     	
     	
     }
+    
+    public ArrayList<Taxi> cheapestTaxis(ArrayList<Taxi> davesTaxis, ArrayList<Taxi> ericsTaxis, ArrayList<Taxi> jeffsTaxis){
+    	
+    	ArrayList<Taxi> allTaxis = new ArrayList<Taxi>();
+    	ArrayList<Taxi> cheapestTaxis = new ArrayList<Taxi>();
+    	
+    	allTaxis.addAll(davesTaxis);
+    	allTaxis.addAll(ericsTaxis);
+    	allTaxis.addAll(jeffsTaxis);
+
+    	Taxi cheapestSTANDARD = new Taxi(carType.STANDARD,0,"");
+    	Taxi cheapestEXECUTIVE = new Taxi(carType.EXECUTIVE,0,"");
+    	Taxi cheapestLUXURY = new Taxi(carType.LUXURY,0,"");
+    	Taxi cheapestPEOPLE_CARRIER = new Taxi(carType.PEOPLE_CARRIER,0,"");
+    	Taxi cheapestLUXURY_PEOPLE_CARRIER = new Taxi(carType.LUXURY_PEOPLE_CARRIER,0,"");
+    	Taxi cheapestMINIBUS = new Taxi(carType.MINIBUS,0,"");
+    	
+    	for(Taxi taxi : allTaxis) {
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestSTANDARD.getPrice()) {
+    			cheapestSTANDARD = taxi;
+    		}
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestEXECUTIVE.getPrice()) {
+    			cheapestEXECUTIVE = taxi;
+    		}
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestLUXURY.getPrice()) {
+    			cheapestLUXURY = taxi;
+    		}
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestPEOPLE_CARRIER.getPrice()) {
+    			cheapestPEOPLE_CARRIER = taxi;
+    		}
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestLUXURY_PEOPLE_CARRIER.getPrice()) {
+    			cheapestLUXURY_PEOPLE_CARRIER = taxi;
+    		}
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestMINIBUS.getPrice()) {
+    			cheapestMINIBUS = taxi;
+    		}
+    	}
+    	
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestSTANDARD);
+    	}
+    	if(cheapestEXECUTIVE.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestEXECUTIVE);
+    	}
+    	if(cheapestLUXURY.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestLUXURY);
+    	}
+    	if(cheapestPEOPLE_CARRIER.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestPEOPLE_CARRIER);
+    	}
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestLUXURY_PEOPLE_CARRIER);
+    	}
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestMINIBUS);
+    	}
+    	
+		return cheapestTaxis;
+
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
