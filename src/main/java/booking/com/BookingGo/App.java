@@ -70,7 +70,7 @@ public class App {
         	  	
         	System.out.println("From available taxis: \n" + davesTaxisOutput + " " + ericsTaxisOutput + " " + jeffsTaxisOutput + "\n");
         	
-        	System.out.println("Best options from each supplier are: \n");
+        	System.out.println("Best options from all suppliers are: \n");
         	for(Taxi taxi : cheapestTaxis) {
         		System.out.println(taxi.getCarType() + " - " + taxi.getSupplier() + " - " + taxi.getPrice());
         	}

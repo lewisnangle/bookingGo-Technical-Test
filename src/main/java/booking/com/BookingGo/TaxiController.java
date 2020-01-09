@@ -164,10 +164,10 @@ public class TaxiController {
     	if(cheapestPEOPLE_CARRIER.getPrice()!=Integer.MAX_VALUE) {
     		cheapestTaxis.add(cheapestPEOPLE_CARRIER);
     	}
-    	if(cheapestSTANDARD.getPrice()!=Integer.MAX_VALUE) {
+    	if(cheapestLUXURY_PEOPLE_CARRIER.getPrice()!=Integer.MAX_VALUE) {
     		cheapestTaxis.add(cheapestLUXURY_PEOPLE_CARRIER);
     	}
-    	if(cheapestSTANDARD.getPrice()!=Integer.MAX_VALUE) {
+    	if(cheapestMINIBUS.getPrice()!=Integer.MAX_VALUE) {
     		cheapestTaxis.add(cheapestMINIBUS);
     	}
     	
