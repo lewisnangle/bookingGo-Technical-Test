@@ -50,8 +50,8 @@ public class App {
     	ericsCars = suppliers.getTaxiOptions(pickup,dropoff,passengers,"eric");
     	jeffsCars = suppliers.getTaxiOptions(pickup,dropoff,passengers,"jeff");    	
       	
-    	if (davesCars.isEmpty()) {
-    		System.out.println("No cars available at this time - Please try again later");
+    	if (davesCars.isEmpty() || davesCars == null) {
+    		System.out.println("No cars available at this time from Dave - Please try again later");
     	} else {
     		Collections.sort(davesCars,Collections.reverseOrder());
     		System.out.println("");
@@ -60,8 +60,8 @@ public class App {
         	}
     	}
     	
-    	if (ericsCars.isEmpty()) {
-    		System.out.println("No cars available at this time - Please try again later");
+    	if (ericsCars.isEmpty() || ericsCars == null) {
+    		System.out.println("No cars available at this time from Eric - Please try again later");
     	} else {
     		Collections.sort(ericsCars,Collections.reverseOrder());
     		System.out.println("");
@@ -70,8 +70,8 @@ public class App {
         	}
     	}
     	
-    	if (jeffsCars.isEmpty()) {
-    		System.out.println("No cars available at this time - Please try again later");
+    	if (jeffsCars.isEmpty() || jeffsCars == null ) {
+    		System.out.println("No cars available at this time from Jeff - Please try again later");
     	} else {
     		Collections.sort(jeffsCars,Collections.reverseOrder());
     		System.out.println("");

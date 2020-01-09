@@ -21,9 +21,19 @@ public class TaxiSuppliers {
 		JsonObject jsonResponse = null;
 		
 		try {
-
-			URL url = new URL("https://techtest.rideways.com/" + supplier + "/?pickup="+ pickup + "&dropoff=" + dropoff);
+			URL url = null;
 			
+			long start = System.currentTimeMillis();
+			long end = start + 2*1000; // 2 * 1000ms = 2s
+			while (System.currentTimeMillis() < end){
+				url = new URL("https://techtest.rideways.com/" + supplier + "/?pickup="+ pickup + "&dropoff=" + dropoff);
+				break;
+			}
+			
+			if(url == null) {
+				return null;
+			}
+
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("Accept", "application/json");
@@ -75,6 +85,9 @@ public class TaxiSuppliers {
 	
 	public ArrayList<Car> getTaxiOptions(String pickup,String dropoff,int passengers,String supplier){
 		JsonObject jsonObject = callTaxiAPI(pickup, dropoff, passengers, supplier);
+		if(jsonObject == null) {
+			return null;
+		}
 		
 		return parseJsonObject(jsonObject, passengers, supplier);
 		
