@@ -107,4 +107,64 @@ public class TaxiController {
 		
 	}
 	
+    public ArrayList<Taxi> cheapestTaxis(ArrayList<Taxi> davesTaxis, ArrayList<Taxi> ericsTaxis, ArrayList<Taxi> jeffsTaxis){
+    	
+    	ArrayList<Taxi> allTaxis = new ArrayList<Taxi>();
+    	ArrayList<Taxi> cheapestTaxis = new ArrayList<Taxi>();
+    	
+    	allTaxis.addAll(davesTaxis);
+    	allTaxis.addAll(ericsTaxis);
+    	allTaxis.addAll(jeffsTaxis);
+
+    	Taxi cheapestSTANDARD = new Taxi(carType.STANDARD,Integer.MAX_VALUE,"");
+    	Taxi cheapestEXECUTIVE = new Taxi(carType.EXECUTIVE,Integer.MAX_VALUE,"");
+    	Taxi cheapestLUXURY = new Taxi(carType.LUXURY,Integer.MAX_VALUE,"");
+    	Taxi cheapestPEOPLE_CARRIER = new Taxi(carType.PEOPLE_CARRIER,Integer.MAX_VALUE,"");
+    	Taxi cheapestLUXURY_PEOPLE_CARRIER = new Taxi(carType.LUXURY_PEOPLE_CARRIER,Integer.MAX_VALUE,"");
+    	Taxi cheapestMINIBUS = new Taxi(carType.MINIBUS,Integer.MAX_VALUE,"");
+    	
+    	for(Taxi taxi : allTaxis) {
+    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() < cheapestSTANDARD.getPrice()) {
+    			cheapestSTANDARD = taxi;
+    		}
+    		if(taxi.getCarType() == carType.EXECUTIVE && taxi.getPrice() < cheapestEXECUTIVE.getPrice()) {
+    			cheapestEXECUTIVE = taxi;
+    		}
+    		if(taxi.getCarType() == carType.LUXURY && taxi.getPrice() < cheapestLUXURY.getPrice()) {
+    			cheapestLUXURY = taxi;
+    		}
+    		if(taxi.getCarType() == carType.PEOPLE_CARRIER && taxi.getPrice() < cheapestPEOPLE_CARRIER.getPrice()) {
+    			cheapestPEOPLE_CARRIER = taxi;
+    		}
+    		if(taxi.getCarType() == carType.LUXURY_PEOPLE_CARRIER && taxi.getPrice() < cheapestLUXURY_PEOPLE_CARRIER.getPrice()) {
+    			cheapestLUXURY_PEOPLE_CARRIER = taxi;
+    		}
+    		if(taxi.getCarType() == carType.MINIBUS && taxi.getPrice() < cheapestMINIBUS.getPrice()) {
+    			cheapestMINIBUS = taxi;
+    		}
+    	}
+    	
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestSTANDARD);
+    	}
+    	if(cheapestEXECUTIVE.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestEXECUTIVE);
+    	}
+    	if(cheapestLUXURY.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestLUXURY);
+    	}
+    	if(cheapestPEOPLE_CARRIER.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestPEOPLE_CARRIER);
+    	}
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestLUXURY_PEOPLE_CARRIER);
+    	}
+    	if(cheapestSTANDARD.getPrice()!=0) {
+    		cheapestTaxis.add(cheapestMINIBUS);
+    	}
+    	
+		return cheapestTaxis;
+
+    }
+	
 }

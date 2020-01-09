@@ -5,6 +5,8 @@ public class Taxi implements Comparable<Taxi>{
 	int price;
 	int seats;
 	private carType carType;
+
+
 	String supplier_id;
 	
 	enum carType {
@@ -60,6 +62,11 @@ public class Taxi implements Comparable<Taxi>{
 	
 	public int compareTo(Taxi car) {
 		return Integer.compare(this.getPrice(), car.getPrice());
+	}
+	
+	@Override
+	public String toString() {
+		return "Taxi [price=" + price + ", carType=" + carType + ", supplier_id=" + supplier_id + "]";
 	}
 	
 }

@@ -43,85 +43,32 @@ public class App {
     	
     	System.out.println("Finding you a ride.. pickup: " + pickup + ", dropoff: " + dropoff + ", Number of passengers: " + passengers);
     	
-    	TaxiController suppliers = new TaxiController();
+    	TaxiController taxiController = new TaxiController();
     	
     	ArrayList<Taxi> davesTaxis = new ArrayList<Taxi>();
     	ArrayList<Taxi> ericsTaxis = new ArrayList<Taxi>();
     	ArrayList<Taxi> jeffsTaxis = new ArrayList<Taxi>();
     	    	
     	
-    	davesTaxis = suppliers.getTaxiOptions(pickup,dropoff,passengers,"dave");
-    	ericsTaxis = suppliers.getTaxiOptions(pickup,dropoff,passengers,"eric");
-    	jeffsTaxis = suppliers.getTaxiOptions(pickup,dropoff,passengers,"jeff");    	
+    	davesTaxis = taxiController.getTaxiOptions(pickup,dropoff,passengers,"dave");
+    	ericsTaxis = taxiController.getTaxiOptions(pickup,dropoff,passengers,"eric");
+    	jeffsTaxis = taxiController.getTaxiOptions(pickup,dropoff,passengers,"jeff");    	
       	
-    	String davesTaxisOutput= suppliers.getString(davesTaxis,"dave");
-    	String ericsTaxisOutput= suppliers.getString(ericsTaxis,"eric");
-    	String jeffsTaxisOutput= suppliers.getString(jeffsTaxis,"jeff");
+    	String davesTaxisOutput= taxiController.getString(davesTaxis,"dave");
+    	String ericsTaxisOutput= taxiController.getString(ericsTaxis,"eric");
+    	String jeffsTaxisOutput= taxiController.getString(jeffsTaxis,"jeff");
     	
-    	System.out.println(davesTaxisOutput + " " + ericsTaxisOutput + " " + jeffsTaxisOutput);
+    	ArrayList<Taxi> cheapestTaxis = taxiController.cheapestTaxis(davesTaxis,ericsTaxis,jeffsTaxis);
+    	  	
+    	System.out.println("From available taxis: \n" + davesTaxisOutput + " " + ericsTaxisOutput + " " + jeffsTaxisOutput + "\n");
     	
+    	System.out.println("Best options from each supplier are: \n");
+    	for(Taxi taxi : cheapestTaxis) {
+    		System.out.println(taxi.getCarType() + " - " + taxi.getSupplier() + " - " + taxi.getPrice());
+    	}
     	
     }
     
-    public ArrayList<Taxi> cheapestTaxis(ArrayList<Taxi> davesTaxis, ArrayList<Taxi> ericsTaxis, ArrayList<Taxi> jeffsTaxis){
-    	
-    	ArrayList<Taxi> allTaxis = new ArrayList<Taxi>();
-    	ArrayList<Taxi> cheapestTaxis = new ArrayList<Taxi>();
-    	
-    	allTaxis.addAll(davesTaxis);
-    	allTaxis.addAll(ericsTaxis);
-    	allTaxis.addAll(jeffsTaxis);
-
-    	Taxi cheapestSTANDARD = new Taxi(carType.STANDARD,0,"");
-    	Taxi cheapestEXECUTIVE = new Taxi(carType.EXECUTIVE,0,"");
-    	Taxi cheapestLUXURY = new Taxi(carType.LUXURY,0,"");
-    	Taxi cheapestPEOPLE_CARRIER = new Taxi(carType.PEOPLE_CARRIER,0,"");
-    	Taxi cheapestLUXURY_PEOPLE_CARRIER = new Taxi(carType.LUXURY_PEOPLE_CARRIER,0,"");
-    	Taxi cheapestMINIBUS = new Taxi(carType.MINIBUS,0,"");
-    	
-    	for(Taxi taxi : allTaxis) {
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestSTANDARD.getPrice()) {
-    			cheapestSTANDARD = taxi;
-    		}
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestEXECUTIVE.getPrice()) {
-    			cheapestEXECUTIVE = taxi;
-    		}
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestLUXURY.getPrice()) {
-    			cheapestLUXURY = taxi;
-    		}
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestPEOPLE_CARRIER.getPrice()) {
-    			cheapestPEOPLE_CARRIER = taxi;
-    		}
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestLUXURY_PEOPLE_CARRIER.getPrice()) {
-    			cheapestLUXURY_PEOPLE_CARRIER = taxi;
-    		}
-    		if(taxi.getCarType() == carType.STANDARD && taxi.getPrice() > cheapestMINIBUS.getPrice()) {
-    			cheapestMINIBUS = taxi;
-    		}
-    	}
-    	
-    	if(cheapestSTANDARD.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestSTANDARD);
-    	}
-    	if(cheapestEXECUTIVE.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestEXECUTIVE);
-    	}
-    	if(cheapestLUXURY.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestLUXURY);
-    	}
-    	if(cheapestPEOPLE_CARRIER.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestPEOPLE_CARRIER);
-    	}
-    	if(cheapestSTANDARD.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestLUXURY_PEOPLE_CARRIER);
-    	}
-    	if(cheapestSTANDARD.getPrice()!=0) {
-    		cheapestTaxis.add(cheapestMINIBUS);
-    	}
-    	
-		return cheapestTaxis;
-
-    }
     
 }
 
