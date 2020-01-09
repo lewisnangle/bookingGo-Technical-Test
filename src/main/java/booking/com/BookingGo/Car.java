@@ -49,10 +49,6 @@ public class Car implements Comparable<Car>{
 		this.carType = carType;
 	}
 
-	public int compareTo(Car car) {
-		return Integer.compare(this.getPrice(), car.getPrice());
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -61,6 +57,8 @@ public class Car implements Comparable<Car>{
 		this.price = price;
 	}
 	
-	
+	public int compareTo(Car car) {
+		return Integer.compare(this.getPrice(), car.getPrice());
+	}
 	
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import com.google.gson.JsonObject;
+
 
 public class App {
 	
@@ -44,9 +46,9 @@ public class App {
     	ArrayList<Car> jeffsCars = new ArrayList<Car>();
     	    	
     	
-    	davesCars = suppliers.callDavesTaxis(pickup,dropoff,passengers);
-    	ericsCars = suppliers.callEricsTaxis(pickup,dropoff,passengers);
-    	jeffsCars = suppliers.callJeffsTaxis(pickup,dropoff,passengers);    	
+    	davesCars = suppliers.getTaxiOptions(pickup,dropoff,passengers,"dave");
+    	ericsCars = suppliers.getTaxiOptions(pickup,dropoff,passengers,"eric");
+    	jeffsCars = suppliers.getTaxiOptions(pickup,dropoff,passengers,"jeff");    	
       	
     	if (davesCars.isEmpty()) {
     		System.out.println("No cars available at this time - Please try again later");
